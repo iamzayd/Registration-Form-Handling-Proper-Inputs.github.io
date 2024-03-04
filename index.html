@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expt 5</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Honk&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Honk&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+
+    <style>
+        body{
+            font-family: "Pixelify Sans", sans-serif;
+            background-color: #f0f0f0; /* Light grey background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            height:550px;
+        }
+
+        h2 {
+            margin-top: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensures padding doesn't affect overall width */
+            /* margin-bottom: 0px; */
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.6em;
+            min-height: 10px; /* Reserve space for error messages */
+        }
+
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 600px) {
+            form {
+                width: 90%;
+                margin: 20px;
+            }
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <form id="registrationForm" action="#" method="post">
+        
+        <h2>Registration Form</h2>
+
+        <label for="firstName">First Name:</label><br>
+        <input type="text" id="firstName" name="firstName">
+        <span id="firstNameError" class="error"></span><br>
+
+        <label for="lastName">Last Name:</label><br>
+        <input type="text" id="lastName" name="lastName">
+        <span id="lastNameError" class="error"></span><br>
+
+        <label for="emailId">Email ID:</label><br>
+        <input type="text" id="emailId" name="emailId">
+        <span id="emailIdError" class="error"></span><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password">
+        <span id="passwordError" class="error"></span><br>
+
+
+        <input type="submit" value="Register">
+    </form>
+
+
+    <script>
+        const form = document.getElementById('registrationForm');
+
+        const firstName = document.getElementById('firstName');
+        const firstNameError = document.getElementById('firstNameError');
+
+        const lastName = document.getElementById('lastName');
+        const lastNameError = document.getElementById('lastNameError');
+
+        const emailId = document.getElementById('emailId');
+        const emailIdError = document.getElementById('emailIdError');
+        
+        const password = document.getElementById('password');
+        const passwordError = document.getElementById('passwordError');
+
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/;
+
+
+
+        form.addEventListener('submit', function(event) {
+            let hasError = false;
+            if (firstName.value === '') {
+                firstNameError.textContent = 'First name is required';
+                hasError = true;
+            } else {
+                firstNameError.textContent = '';
+            }
+
+            if (hasError) {
+                event.preventDefault(); // Prevent form submission if there are errors
+            }
+
+            
+
+            if (lastName.value === '') {
+                lastNameError.textContent = 'Last name is required';
+                hasError = true;
+            } else {
+                lastNameError.textContent = '';
+            }
+
+            if (hasError) {
+                event.preventDefault(); // Prevent form submission if there are errors
+            }
+
+
+
+            if (emailId.value === '') {
+                emailIdError.textContent = 'Email ID is required';
+                hasError = true;
+            } else if (!emailRegex.test(emailId.value)) {
+                emailIdError.textContent = 'Email is not correct. Email must be in the format: user@example.com';
+                hasError = true;
+            } else {
+                emailIdError.textContent = '';
+            }
+
+
+
+            if (password.value === '') {
+                passwordError.textContent = 'Password is required';
+                hasError = true;
+            } else if (!passwordRegex.test(password.value)) {
+                passwordError.textContent = 'Password must contain at least one uppercase letter, one lowercase letter, one digit, one special character, and be at least 8 characters long';
+                hasError = true;
+            } else {
+                passwordError.textContent = '';
+            }
+
+        });
+    </script>
+</body>
+</html>
